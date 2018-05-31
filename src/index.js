@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Keycloak from 'keycloak-js'
 
+import 'babel-polyfill'
+
 import store from 'store'
 import {TOKEN} from 'store/mutation-types'
 
