@@ -34,10 +34,10 @@ const common = {
     ]
   },
   resolve: {
-    extensions: ['.js', '.vue'],
+    extensions: ['.js', '.vue', '.json'],
     modules: [ path.resolve(__dirname, 'src'), 'node_modules'],
     alias: {
-      'vue$': 'vue/dist/vue.esm.js' // 'vue/dist/vue.common.js' for webpack 1
+      'vue$': 'vue/dist/vue.esm.js'
     },
   },
   plugins: [

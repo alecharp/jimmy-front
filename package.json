@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/alecharp/jimmy-front#readme",
   "dependencies": {
+    "keycloak-js": "^4.0.0-beta.3",
     "vue": "^2.5.16"
   },
   "devDependencies": {
