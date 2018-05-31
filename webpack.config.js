@@ -19,16 +19,21 @@ const common = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['babel-preset-env'],
-            plugins: [
-              require('babel-plugin-syntax-dynamic-import'),
-              require('babel-plugin-transform-object-rest-spread'),
-            ]
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: ['babel-preset-env'],
+              plugins: [
+                require('babel-plugin-syntax-dynamic-import'),
+                require('babel-plugin-transform-object-rest-spread'),
+              ]
+            }
+          },
+          {
+            loader: 'eslint-loader'
           }
-        }
+        ],
       },
       {test: /\.css$/, exclude: /node_modules/, use: 'css-loader'},
     ]

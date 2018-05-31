@@ -6,13 +6,13 @@ import 'babel-polyfill'
 import store from 'store'
 import {TOKEN} from 'store/mutation-types'
 
-const keycloak = Keycloak(require('keycloak'));
+const keycloak = Keycloak(require('keycloak'))
 keycloak.init({onLoad: 'login-required'})
-    .success(authenticated => {
-      if (authenticated) {
-        store.commit(TOKEN, {token: keycloak.token})
-      }
-    });
+  .success(authenticated => {
+    if (authenticated) {
+      store.commit(TOKEN, {token: keycloak.token})
+    }
+  })
 
 new Vue({
   el: '#jimmy',
@@ -20,4 +20,4 @@ new Vue({
   components: {
     App: () => import(/* webpackChunkName: 'App' */ 'components/App')
   }
-});
+})
