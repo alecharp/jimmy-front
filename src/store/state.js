@@ -1,5 +1,5 @@
 export default {
   events: [],
-  token: '',
+  token: null,
   user: null,
 }

@@ -15,7 +15,7 @@ const get = async (url, token) => {
 
 export default {
   getEvents: ({state, commit}) => {
-    if (state.token !== '') {
+    if (state.token) {
       get('/api/events', state.token)
         .then(events => commit(EVENTS, {events}))
     }
