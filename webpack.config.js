@@ -11,7 +11,7 @@ const common = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name]-[chunkhash]-bundle.js',
+    filename: '[name]-[chunkhash].js',
   },
   module: {
     rules: [
@@ -56,6 +56,7 @@ const common = {
 
 const development = {
   mode: 'development',
+  devtool: 'eval',
   devServer: {
     contentBase: path.resolve(__dirname, 'dist'),
     port: '4000',
@@ -67,6 +68,7 @@ const development = {
 
 const production = {
   mode: 'production',
+  devtool: 'inline-cheap-module-source-map',
 };
 
 module.exports = env => {
