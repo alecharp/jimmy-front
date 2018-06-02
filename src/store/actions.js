@@ -1,4 +1,4 @@
-import {EVENTS} from './mutation-types'
+import {EVENTS} from './mutations'
 
 const get = async (url, token) => {
   const headers = new Headers()
@@ -14,10 +14,12 @@ const get = async (url, token) => {
 }
 
 export default {
-  getEvents: ({state, commit}) => {
-    if (state.token) {
-      get('/api/events', state.token)
+  getEvents: ({commit, getters}) => {
+    const token = getters['security/token']
+    if (getters['security/authenticated']) {
+      get('/api/events', token)
         .then(events => commit(EVENTS, {events}))
+        .catch(console.error)
     }
   },
 }

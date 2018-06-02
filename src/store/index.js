@@ -2,8 +2,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import createLogger from 'vuex/dist/logger'
 
-import state from './state'
-import getters from './getters'
+import security from './security'
+
 import mutations from './mutations'
 import actions from './actions'
 
@@ -11,11 +11,24 @@ Vue.use(Vuex)
 
 const debug = process.env.NODE_ENV !== 'production'
 
+const state = {
+  events: [],
+  user: null,
+}
+
+const getters = {
+  getDisplayName: state =>
+    state.user ? `${state.user.firstName} ${state.user.lastName}` : ''
+}
+
 const store = new Vuex.Store({
   state,
   getters,
   mutations,
   actions,
+  modules: {
+    security: security,
+  },
   strict: debug,
   plugins: debug ? [createLogger()] : [],
 })
