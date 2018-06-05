@@ -3,8 +3,7 @@ export const USER = 'USER'
 
 export default {
   [USER](state, {user}) {
-    const {username, firstName, lastName, email} = user
-    state.user = {username, firstName, lastName, email}
+    state.user = user
   },
   [EVENTS](state, {events}) {
     state.events = events

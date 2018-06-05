@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Hello {{ displayName }}!!</h1>
-    <EventsListing/>
+    <EventsListing />
   </div>
 </template>
 
@@ -14,7 +14,7 @@
     },
     computed: {
       ...mapGetters({
-        displayName: 'getDisplayName'
+        displayName: 'getDisplayName',
       })
     }
   }
