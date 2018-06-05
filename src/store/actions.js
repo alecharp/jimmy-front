@@ -1,4 +1,7 @@
-import {EVENTS} from './mutations'
+import {
+  EVENTS,
+  USER,
+} from './mutations'
 
 const get = async (url, token) => {
   const headers = new Headers()
@@ -14,12 +17,18 @@ const get = async (url, token) => {
 }
 
 export default {
-  getEvents: ({commit, getters}) => {
+  async getUser({state, commit}) {
+    const profile = await state.security.keycloak.loadUserProfile()
+    const {email, firstName, lastName, username} = profile
+    const user = {email, firstName, lastName, username}
+    commit(USER, {user})
+  },
+  async getEvents({dispatch, commit, getters}) {
+    await dispatch('security/renew')
     const token = getters['security/token']
     if (getters['security/authenticated']) {
-      get('/api/events', token)
+      await get('/api/events', token)
         .then(events => commit(EVENTS, {events}))
-        .catch(console.error)
     }
   },
 }

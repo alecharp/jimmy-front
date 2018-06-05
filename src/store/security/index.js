@@ -3,13 +3,13 @@ import actions from './actions'
 export const KEYCLOAK = 'KEYCLOAK'
 
 const state = {
-  keycloak: null
+  keycloak: null,
 }
 
 const getters = {
   authenticated: state => state.keycloak && state.keycloak.authenticated,
-  token: state => {
-    return state.keycloak ? state.keycloak.token : null
+  token: (state, getters) => {
+    return getters.authenticated ? state.keycloak.token : null
   },
 }
 
