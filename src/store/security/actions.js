@@ -14,7 +14,6 @@ export default {
   },
   logout: ({state}) => {
     state.keycloak.logout()
-      .success(foo => console.log(foo))
   },
   async renew({state, commit}) {
     const keycloak = state.keycloak
