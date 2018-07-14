@@ -26,6 +26,9 @@
     methods: {
       onSubmit: function() {
         this.$store.dispatch('createEvent', {event: {name: this.name, date: this.date}})
+          .then(() => {
+            this.$router.push('/')
+          })
       },
     }
   }
