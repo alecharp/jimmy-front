@@ -4,6 +4,8 @@ import 'babel-polyfill'
 
 import store from 'store'
 
+import 'ui/index.scss'
+
 new Vue({
   el: '#jimmy',
   store,
