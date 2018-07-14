@@ -1,6 +1,6 @@
 import actions from './actions'
 
-export const KEYCLOAK = 'KEYCLOAK'
+import {KEYCLOAK} from './mutations'
 
 const state = {
   keycloak: null,

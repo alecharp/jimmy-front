@@ -1,6 +1,6 @@
 import Keycloak from 'keycloak-js'
 
-import {KEYCLOAK} from './index'
+import {KEYCLOAK} from './mutations'
 
 export default {
   async auth({commit}) {
