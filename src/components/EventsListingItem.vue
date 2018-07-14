@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="cell">{{ event.name }}</div>
-    <div class="cell">{{ event.id }}</div>
     <div class="cell">{{ event.date }}</div>
     <div class="cell">
       <button @click.once.prevent="deleteEvent(event.id)">x</button>
