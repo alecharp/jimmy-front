@@ -11,7 +11,7 @@ const common = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name]-[chunkhash].js',
+    filename: '[name]-[hash].js',
   },
   module: {
     rules: [
@@ -29,17 +29,22 @@ const common = {
                 require('babel-plugin-transform-object-rest-spread'),
               ]
             }
-          },
-          {
-            loader: 'eslint-loader'
           }
         ],
       },
-      {test: /\.css$/, exclude: /node_modules/, use: 'css-loader'},
+      {
+        test: /\.scss$/,
+        exclude: /node_modules/,
+        use: [
+          'vue-style-loader',
+          'css-loader',
+          'sass-loader'
+        ],
+      },
     ]
   },
   resolve: {
-    extensions: ['.js', '.vue', '.json'],
+    extensions: ['.js', '.vue', '.json', '.scss'],
     modules: [ path.resolve(__dirname, 'src'), 'node_modules'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js'

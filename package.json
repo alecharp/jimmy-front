@@ -5,7 +5,7 @@
   "main": "src/server.js",
   "scripts": {
     "build": "webpack --env prod",
-    "start": "webpack-dev-server --env dev"
+    "start": "webpack-dev-server --env dev --hot"
   },
   "repository": {
     "type": "git",
@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/alecharp/jimmy-front#readme",
   "dependencies": {
-    "keycloak-js": "^4.0.0-beta.3",
+    "keycloak-js": "^4.1.0",
     "vue": "^2.5.16",
     "vuex": "^3.0.1"
   },
@@ -35,7 +35,9 @@
     "eslint": "^4.19.1",
     "eslint-loader": "^2.0.0",
     "html-webpack-plugin": "^3.2.0",
+    "node-sass": "^4.9.2",
     "path": "^0.12.7",
+    "sass-loader": "^7.0.3",
     "vue-loader": "^15.2.2",
     "vue-template-compiler": "^2.5.16",
     "webpack": "^4.10.2",
