@@ -1,7 +1,7 @@
 <template>
   <div>
     <button @click="refresh">Refresh</button>
-    <div class="table">
+    <div class="table" v-if="events && events.length !== 0">
       <div class="row header">
         <div class="cell">Name</div>
         <div class="cell">Date</div>
