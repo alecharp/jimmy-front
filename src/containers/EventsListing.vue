@@ -1,7 +1,13 @@
 <template>
   <div>
     <button @click="refresh">Refresh</button>
-    <EventsListingItem v-for="event in events" :key="event.id" :event="event" />
+    <div class="table">
+      <div class="row header">
+        <div class="cell">Name</div>
+        <div class="cell">Date</div>
+      </div>
+      <EventsListingItem v-for="event in events" :key="event.id" :event="event" class="row"/>
+    </div>
   </div>
 </template>
 

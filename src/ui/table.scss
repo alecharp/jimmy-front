@@ -1,0 +1,28 @@
+$cell-height: 0.5em;
+$header-bg: #999;
+
+div.table {
+  margin-top: 1.5em;
+
+  div.row {
+    display: flex;
+    flex-direction: row;
+
+    &.header {
+      background-color: $header-bg;
+      font-weight: 700;
+    }
+
+    &:nth-child(2n+3) {
+      background-color: lighten($header-bg, 20%);
+    }
+
+    div.cell {
+      padding: $cell-height;
+      line-height: $cell-height;
+      &:first-child {
+        flex-grow: 1;
+      }
+    }
+  }
+}

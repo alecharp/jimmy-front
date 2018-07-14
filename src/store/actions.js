@@ -53,4 +53,16 @@ export default {
         .then(() => dispatch('getEvents'))
     }
   },
+  async deleteEvent({dispatch, getters}, eventId) {
+    await dispatch('security/renew')
+    const token = getters['security/token']
+    if(getters['security/authenticated']) {
+      const headers = new Headers()
+      headers.append('Accept', 'application/json')
+      headers.append('Content-Type', 'application/json')
+      headers.append('Authorization', `Bearer ${token}`)
+      await fetch(`/api/events/${eventId}`, {headers, mode: 'cors', method: 'DELETE'})
+        .then(() => dispatch('getEvents'))
+    }
+  },
 }
