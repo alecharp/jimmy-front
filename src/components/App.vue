@@ -3,6 +3,8 @@
     <h1>Hello {{ displayName }}!!</h1>
     <button @click="logout">Logout</button>
     <hr/>
+    <EventForm />
+    <hr/>
     <EventsListing />
   </div>
 </template>
@@ -16,6 +18,7 @@
     name: 'App',
     components: {
       EventsListing: () => import(/* webpackChunkName: 'Events' */ 'containers/EventsListing'),
+      EventForm: () => import(/* webpackChunkName: 'Events' */ 'components/EventForm')
     },
     computed: {
       ...mapGetters({

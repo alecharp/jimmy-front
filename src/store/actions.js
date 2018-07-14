@@ -3,7 +3,7 @@ import {
   USER,
 } from './mutations'
 
-const get = async (url, token) => {
+const get = async (url, {token}) => {
   const headers = new Headers()
   headers.append('Accept', 'application/json')
   headers.append('Authorization', `Bearer ${token}`)
@@ -14,6 +14,20 @@ const get = async (url, token) => {
     throw new Error(status)
   }
   return await response.json()
+}
+
+const post = async (url, {token, body}) => {
+  const headers = new Headers()
+  headers.append('Accept', 'application/json')
+  headers.append('Content-Type', 'application/json')
+  headers.append('Authorization', `Bearer ${token}`)
+
+  const response = await fetch(url, {headers, mode: 'cors', body, method: 'POST'})
+  if(!response.ok) {
+    const {status} = response
+    throw new Error(status)
+  }
+  return Promise.resolve({});
 }
 
 export default {
@@ -27,8 +41,16 @@ export default {
     await dispatch('security/renew')
     const token = getters['security/token']
     if (getters['security/authenticated']) {
-      await get('/api/events', token)
+      await get('/api/events', {token})
         .then(events => commit(EVENTS, {events}))
+    }
+  },
+  async createEvent({dispatch, getters}, {event}) {
+    await dispatch('security/renew')
+    const token = getters['security/token']
+    if(getters['security/authenticated']) {
+      await post('/api/events', {token, body: JSON.stringify(event)})
+        .then(() => dispatch('getEvents'))
     }
   },
 }
