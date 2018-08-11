@@ -2,8 +2,6 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import createLogger from 'vuex/dist/logger'
 
-import security from './security'
-
 import mutations from './mutations'
 import actions from './actions'
 
@@ -28,9 +26,6 @@ const store = new Vuex.Store({
   getters,
   mutations,
   actions,
-  modules: {
-    security: security,
-  },
   strict: debug,
   plugins: debug ? [createLogger()] : [],
 })

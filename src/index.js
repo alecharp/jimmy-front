@@ -2,10 +2,20 @@ import Vue from 'vue'
 
 import 'babel-polyfill'
 
+import KeycloakVue from './KeycloakVue'
+
 import store from 'store'
 import router from 'router'
 
 import 'ui/index.scss'
+
+Vue.use(KeycloakVue, {
+  "realm": "jimmy",
+  "clientId": "jimmy-front",
+  "url": "http://localhost:8082/auth/",
+  "sslRequired": "external",
+  "cors": true
+})
 
 new Vue({
   router,
@@ -15,6 +25,3 @@ new Vue({
   },
   el: '#jimmy'
 })
-
-store.dispatch('security/auth')
-  .then(() => store.dispatch('getUser'))

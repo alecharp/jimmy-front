@@ -8,7 +8,7 @@
       <div class="user">
         <span>{{ getDisplayName() }}</span>
         <span>
-          <button @click.prevent.once="logout">Logout</button>
+          <button @click.prevent.once="logout()">Logout</button>
         </span>
       </div>
     </nav>
@@ -29,9 +29,7 @@
       ...mapGetters(['getDisplayName'])
     },
     methods: {
-      ...mapActions({
-        logout: 'security/logout',
-      })
+      logout: () => () => {}
     },
   }
 </script>
