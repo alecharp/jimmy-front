@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div class="cell">{{ event.name }}</div>
+    <div class="cell link" @click.capture="loadEvent(event.id)">{{ event.name }}</div>
     <div class="cell">{{ event.date }}</div>
     <div class="cell">
-      <button @click.once.prevent="deleteEvent(event.id)">x</button>
+      <button @click.once="deleteEvent(event.id)">x</button>
     </div>
   </div>
 </template>
@@ -17,7 +17,10 @@
       event: {type: Object, required: true},
     },
     methods: {
-      ...mapActions(['deleteEvent'])
+      ...mapActions(['deleteEvent']),
+      loadEvent: function(id) {
+        this.$router.push({path: `/event/${id}`})
+      }
     },
   }
 </script>

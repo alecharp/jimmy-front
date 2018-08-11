@@ -19,6 +19,8 @@ const state = {
 const getters = {
   getDisplayName: state => () =>
     state.user ? `${state.user.firstName} ${state.user.lastName}` : null,
+  getEvent: state => id =>
+    state.events ? state.events.find(e => e.id === id) : null,
 }
 
 const store = new Vuex.Store({

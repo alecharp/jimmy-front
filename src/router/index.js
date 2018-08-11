@@ -15,6 +15,11 @@ const routes = [
     path: '/new'
   },
   {
+    name: 'eventDetail',
+    component: () => import(/* webpackChunkName: 'Events' */ 'components/EventDetails'),
+    path: '/event/:id'
+  },
+  {
     path: '*',
     redirect: '/'
   }
