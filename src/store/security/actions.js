@@ -23,7 +23,7 @@ export default {
         if (refreshed) {
           commit(KEYCLOAK, {keycloak})
         }
-      } catch (_){
+      } catch (_) {
         commit(KEYCLOAK, {keycloak: null})
       }
     }

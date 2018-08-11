@@ -17,7 +17,7 @@ const state = {
 }
 
 const getters = {
-  getDisplayName: state =>
+  getDisplayName: state => () =>
     state.user ? `${state.user.firstName} ${state.user.lastName}` : null,
 }
 

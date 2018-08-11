@@ -6,7 +6,7 @@
         <router-link to="/new">New</router-link>
       </div>
       <div class="user">
-        <span>{{ displayName }}</span>
+        <span>{{ getDisplayName() }}</span>
         <span>
           <button @click.prevent.once="logout">Logout</button>
         </span>
@@ -26,9 +26,7 @@
   export default {
     name: 'App',
     computed: {
-      ...mapGetters({
-        displayName: 'getDisplayName',
-      })
+      ...mapGetters(['getDisplayName'])
     },
     methods: {
       ...mapActions({
