@@ -13,6 +13,7 @@
     <div>
       <button type="submit">Create event</button>
     </div>
+    <div v-if="error">{{ error }}</div>
   </form>
 </template>
 
@@ -22,12 +23,17 @@
     data: () => ({
       name: null,
       date: null,
+      error: null,
     }),
     methods: {
       onSubmit: function() {
-        this.$store.dispatch('createEvent', {event: {name: this.name, date: this.date}})
+        const event = {name: this.name, date: this.date}
+        this.$store.dispatch('createEvent', {event})
           .then(() => {
             this.$router.push('/')
+          })
+          .catch(err => {
+            this.error = `Couldn't create the event. Got ${err} from the server.`
           })
       },
     }

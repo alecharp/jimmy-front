@@ -16,11 +16,21 @@ const get = async (url, {token}) => {
   return await response.json()
 }
 
+const getCookie = name => {
+  for(let cookie of decodeURIComponent(document.cookie).split(';')) {
+    if (cookie.trim().startsWith(name)) {
+      return cookie.substring(name.length+1, cookie.length)
+    }
+  }
+  return null;
+}
+
 const post = async (url, {token, body}) => {
   const headers = new Headers()
   headers.append('Accept', 'application/json')
   headers.append('Content-Type', 'application/json')
   headers.append('Authorization', `Bearer ${token}`)
+  headers.append('X-XSRF-TOKEN', getCookie('XSRF-TOKEN'))
 
   const response = await fetch(url, {headers, mode: 'cors', body, method: 'POST'})
   if(!response.ok) {
@@ -49,8 +59,12 @@ export default {
     await dispatch('security/renew')
     const token = getters['security/token']
     if(getters['security/authenticated']) {
-      await post('/api/events', {token, body: JSON.stringify(event)})
-        .then(() => dispatch('getEvents'))
+      try {
+        await post('/api/events', {token, body: JSON.stringify(event)})
+          .then(() => dispatch('getEvents'))
+      } catch(error) {
+        return Promise.reject(error)
+      }
     }
   },
   async deleteEvent({dispatch, getters}, eventId) {
