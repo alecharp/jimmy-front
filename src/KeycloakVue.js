@@ -6,7 +6,7 @@ export default {
     Vue.$keycloak = Keycloak(options)
     Vue.$keycloak.init({onLoad: 'login-required'})
 
-    Vue.$kcToken = () => {
+    const updateToken = () => {
       if (Vue.$keycloak.isTokenExpired()) {
         try {
           Vue.$keycloak.updateToken()
@@ -15,10 +15,24 @@ export default {
           Vue.$keycloak.init({onLoad: 'login-required'})
         }
       }
+    }
+
+    /**
+     * Retrieve the token from KeyCloak to be authenticated on the back.
+     * @returns {Promise<string>} will resolve the token value
+     */
+    Vue.prototype.$getKcToken = () => {
+      updateToken()
       return Vue.$keycloak.token
     }
-  },
-  logout: () => {
-    Vue.$keycloak.logout()
+
+    /**
+     * Build the URL to access the user profile management URL.
+     * @returns {Promise<string>} will resolve to the URL
+     */
+    Vue.prototype.$getAccountUrl = () => {
+      updateToken()
+      return Vue.$keycloak.createAccountUrl()
+    }
   },
 }

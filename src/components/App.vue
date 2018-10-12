@@ -1,35 +1,26 @@
 <template>
-  <div>
-    <nav>
-      <div>
-        <router-link to="/">Events</router-link>
-        <router-link to="/new">New</router-link>
-      </div>
-      <div class="user">
-        <span>{{ getDisplayName() }}</span>
-        <span>
-          <button @click.prevent.once="logout()">Logout</button>
-        </span>
-      </div>
-    </nav>
-    <hr/>
-    <router-view/>
+  <div class="flex">
+    <section class="nav-space" :style="{ width: width(), minWidth: width() }"></section>
+    <app-menu :style="{ width: width(), minWidth: width() }" :class="{expended: expended}"/>
+    <div id="expansion" class="flex flex-column justify-center" @click="expend()">
+      <font-awesome-icon icon="minus" :rotation="90" />
+    </div>
+    <div class="flex flex-grow-1 flex-column jmmy-container">
+      <router-view/>
+    </div>
   </div>
 </template>
 
 <script>
-  import {
-    mapGetters,
-    mapActions,
-  } from 'vuex'
-
   export default {
     name: 'App',
-    computed: {
-      ...mapGetters(['getDisplayName'])
+    components: {
+      AppMenu: () => import(/* webpackChunkName: 'App' */ 'components/AppMenu'),
     },
+    data: () => ({expended: false}),
     methods: {
-      logout: () => () => {}
+      expend: function() { this.expended = !this.expended },
+      width: function() { return this.expended ? '280px' : '64px' },
     },
   }
 </script>

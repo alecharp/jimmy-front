@@ -47,11 +47,11 @@ const post = async (url, {body}) => {
 }
 
 export default {
-  async getEvents({dispatch, commit, getters}) {
+  async getEvents({dispatch, commit}) {
     await get('/api/events')
       .then(events => commit(EVENTS, {events}))
   },
-  async createEvent({dispatch, getters}, {event}) {
+  async createEvent({dispatch}, {event}) {
     try {
       await post('/api/events', {body: JSON.stringify(event)})
         .then(() => dispatch('getEvents'))
@@ -59,9 +59,12 @@ export default {
       return Promise.reject(error)
     }
   },
-  async deleteEvent({dispatch, getters}, eventId) {
+  async deleteEvent({dispatch}, eventId) {
     const headers = prepareHeaders()
     await fetch(`/api/events/${eventId}`, {headers, mode: 'cors', method: 'DELETE'})
       .then(() => dispatch('getEvents'))
   },
+  async getProfile() {
+    return Vue.$keycloak.loadUserProfile();
+  }
 }

@@ -7,26 +7,22 @@ const routes = [
   {
     name: 'eventsListing',
     component: () => import(/* webpackChunkName: 'Events' */ 'containers/EventsListing'),
-    path: '/'
+    path: '/events'
   },
   {
-    name: 'eventForm',
-    component: () => import(/* webpackChunkName: 'Events' */ 'components/EventForm'),
-    path: '/new'
-  },
-  {
-    name: 'eventDetail',
-    component: () => import(/* webpackChunkName: 'Events' */ 'components/EventDetails'),
-    path: '/event/:id'
+    name: 'userProfile',
+    component: () => import(/* webpackChunkName: 'User' */ 'containers/UserProfile'),
+    path: '/me'
   },
   {
     path: '*',
-    redirect: '/'
+    redirect: '/events'
   }
 ]
 
 const router = new VueRouter({
   routes,
+  linkExactActiveClass: 'active',
 });
 
 export default router;

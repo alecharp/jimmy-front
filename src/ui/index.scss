@@ -1,5 +1,9 @@
-@import './table';
+@import './layout';
+@import './nav';
+@import './typo';
 
-.link {
-  cursor: pointer;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }

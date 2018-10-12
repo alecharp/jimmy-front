@@ -1,4 +1,6 @@
 import Vue from 'vue'
+import upperFirst from 'lodash/upperFirst'
+import camelCase from 'lodash/camelCase'
 
 import 'babel-polyfill'
 
@@ -7,7 +9,7 @@ import KeycloakVue from './KeycloakVue'
 import store from 'store'
 import router from 'router'
 
-import 'ui/index.scss'
+import 'ui'
 
 Vue.use(KeycloakVue, {
   "realm": "jimmy",
@@ -15,6 +17,18 @@ Vue.use(KeycloakVue, {
   "url": "http://localhost:8082/auth/",
   "sslRequired": "external",
   "cors": true
+})
+
+const requireComponent = require.context(
+  './components',
+  false,
+  /Jimmy[A-Z]\w+\.vue$/
+)
+requireComponent.keys().forEach(filename => {
+  const componentConfig = requireComponent(filename)
+  const componentName = componentConfig.default.name || upperFirst(camelCase(filename.replace(/^\.\/(.*)\.\w+$/, '$1')))
+
+  Vue.component(componentName, componentConfig.default || componentConfig)
 })
 
 new Vue({
