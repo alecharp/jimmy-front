@@ -2,6 +2,10 @@
 @import './nav';
 @import './typo';
 
+@-ms-viewport {
+  width: device-width;
+}
+
 * {
   margin: 0;
   padding: 0;
