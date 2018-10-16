@@ -4,7 +4,6 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   faHome,
   faCalendarAlt,
-  faImages,
   faUserCircle,
   faMinus,
   faChevronRight,
@@ -14,7 +13,6 @@ import { FontAwesomeIcon, FontAwesomeLayers, FontAwesomeLayersText } from '@fort
 library.add(
   faHome,
   faCalendarAlt,
-  faImages,
   faUserCircle,
   faMinus,
   faChevronRight,

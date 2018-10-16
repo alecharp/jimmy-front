@@ -10,11 +10,9 @@ Vue.use(Vuex)
 const debug = process.env.NODE_ENV !== 'production'
 
 const state = {
-  events: [],
 }
 
 const getters = {
-  getEvent: state => id => state.events ? state.events.find(e => e.id === id) : null,
 }
 
 const store = new Vuex.Store({
