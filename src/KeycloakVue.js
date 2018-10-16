@@ -1,38 +1,25 @@
 import Keycloak from 'keycloak-js'
 
+const initConfig = {
+  onLoad: 'login-required',
+  checkLoginIframe: false,
+}
+let loaded = false
+
 export default {
   install: (Vue, options = {}) => {
-    const authenticated = false
-    Vue.$keycloak = Keycloak(options)
-    Vue.$keycloak.init({onLoad: 'login-required'})
+    if (loaded) return
+    loaded = true
 
-    const updateToken = () => {
-      if (Vue.$keycloak.isTokenExpired()) {
-        try {
-          Vue.$keycloak.updateToken()
-        } catch (_) {
-          Vue.$keycloak.clearToken()
-          Vue.$keycloak.init({onLoad: 'login-required'})
-        }
+    const keycloak = Object.assign({}, Keycloak(options))
+    const init = () => keycloak.init(initConfig)
+
+    Object.defineProperty(Vue.prototype, '$keycloak', {
+      get() {
+        return keycloak
       }
-    }
+    })
 
-    /**
-     * Retrieve the token from KeyCloak to be authenticated on the back.
-     * @returns {Promise<string>} will resolve the token value
-     */
-    Vue.prototype.$getKcToken = () => {
-      updateToken()
-      return Vue.$keycloak.token
-    }
-
-    /**
-     * Build the URL to access the user profile management URL.
-     * @returns {Promise<string>} will resolve to the URL
-     */
-    Vue.prototype.$getAccountUrl = () => {
-      updateToken()
-      return Vue.$keycloak.createAccountUrl()
-    }
+    init()
   },
 }
