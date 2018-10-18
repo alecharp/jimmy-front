@@ -1,6 +1,8 @@
 @import './layout';
 @import './nav';
 @import './typo';
+@import './buttons';
+@import './forms';
 
 @-ms-viewport {
   width: device-width;
@@ -10,4 +12,9 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+a {
+  color:inherit;
+  text-decoration: none;
 }

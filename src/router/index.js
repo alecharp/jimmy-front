@@ -7,16 +7,21 @@ const routes = [
   {
     name: 'eventsListing',
     component: () => import(/* webpackChunkName: 'Events' */ 'containers/EventsListing'),
-    path: '/events'
+    path: '/events',
+  },
+  {
+    name: 'eventCreation',
+    component: () => import(/* webpackChunkName: 'Events' */ 'containers/EventCreation'),
+    path: '/events/create',
   },
   {
     name: 'userProfile',
     component: () => import(/* webpackChunkName: 'User' */ 'containers/UserProfile'),
-    path: '/me'
+    path: '/me',
   },
   {
     path: '*',
-    redirect: '/events'
+    redirect: '/events',
   }
 ]
 

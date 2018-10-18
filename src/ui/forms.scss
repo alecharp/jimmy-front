@@ -1,0 +1,23 @@
+form.center {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+input {
+  padding: 5px;
+  border-radius: 3px;
+  border: 1px solid #eee;
+  &:focus {
+    border-color: darken(#eee, 30%);
+    outline: none;
+  }
+}
+
+label {
+  margin-bottom: 0.5rem;
+}
+
+.controls {
+  margin-top: 2rem;
+}

@@ -1,0 +1,29 @@
+.btn {
+  font-size: 0.8rem;
+  border-radius: 3px;
+  padding: 0.5em;
+  background-color: rgba(0, 0, 0, 0);
+  border: 1px solid #d6d6d6;
+
+  &:active {
+    border-color: darken(#d6d6d6, 30%);
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+.btn-large {
+  padding-left: 2em;
+  padding-right: 2em;
+}
+
+.btn-danger {
+  color: red;
+  border-color: red;
+  &:active {
+    color: white;
+    background-color: red;
+  }
+}
