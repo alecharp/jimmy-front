@@ -5,7 +5,7 @@
     <div id="expansion" class="flex flex-column justify-center" @click="expend()">
       <font-awesome-icon icon="minus" :rotation="90" />
     </div>
-    <div class="flex flex-grow-1 flex-column jmmy-container">
+    <div class="flex flex-grow-1 flex-column jimmy-container">
       <router-view/>
     </div>
   </div>
