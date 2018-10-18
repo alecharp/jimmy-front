@@ -77,6 +77,6 @@ const production = {
 };
 
 module.exports = env => {
-  if (env === 'prod') return merge(common, production);
-  return merge(common, development);
+  if (env === 'dev') return merge(common, development);
+  return merge(common, production);
 };
