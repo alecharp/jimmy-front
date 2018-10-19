@@ -5,7 +5,7 @@
       <form @submit.prevent="createEvent()" class="center">
         <div class="flex flex-column flex-grow">
           <label for="event-name">Name</label>
-          <input id="event-name" placeholder="Event name" type="text" @change="updateName"/>
+          <input id="event-name" placeholder="Event name" type="text" @change="updateName" autofocus="autofocus"/>
         </div>
         <div class="controls">
           <button type="submit" :disabled="invalid" class="btn">Create new event</button>
