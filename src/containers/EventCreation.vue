@@ -5,7 +5,8 @@
       <form @submit.prevent="createEvent()" class="center">
         <div class="flex flex-column flex-grow">
           <label for="event-name">Name</label>
-          <input id="event-name" placeholder="Event name" type="text" @change="updateName" autofocus="autofocus"/>
+          <input id="event-name" placeholder="Event name" type="text" autofocus="autofocus"
+                 v-model.trim="name"/>
         </div>
         <div class="controls">
           <button type="submit" :disabled="invalid" class="btn">Create new event</button>
@@ -22,10 +23,6 @@
     name: 'EventCreation',
     data: () => ({invalid: true, name: null}),
     methods: {
-      updateName: function ({target}) {
-        this.name = target.value.trim()
-        this.invalid = this.name === null || this.name === ''
-      },
       createEvent: function () {
         const {name} = this,
           event = {name}
@@ -34,6 +31,11 @@
       },
       cancel: function () {
         this.$router.go(-1)
+      },
+    },
+    watch: {
+      name: function(newName) {
+        this.invalid = newName === ''
       },
     },
   }
