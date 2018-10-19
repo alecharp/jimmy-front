@@ -39,6 +39,10 @@ table {
       &:not(:last-child) td {
         border-bottom: 1px solid $border-color;
       }
+
+      &.clickable {
+        cursor: pointer;
+      }
     }
   }
 }
