@@ -1,6 +1,6 @@
 <template>
   <header class="flex items-center padding-4 jimmy-header">
-    <h1>{{ title }}</h1>
+    <h1 v-if="!!title">{{ title }}</h1>
     <slot></slot>
   </header>
 </template>
@@ -9,7 +9,7 @@
   export default {
     name: 'PageHeader',
     props: {
-      title: {required: true, type: String},
+      title: {required: false, type: String},
     },
   }
 </script>

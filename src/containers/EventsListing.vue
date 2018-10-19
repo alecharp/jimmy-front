@@ -8,7 +8,11 @@
         <div>
           <input type="search" v-model.trim="filter" placeholder="Filter events by name"/>
         </div>
-        <content-table class="top-2" :items="filteredEvents(this.filter)" :headers="['name', 'date']"></content-table>
+        <content-table class="top-2"
+                       :items="filteredEvents(this.filter)"
+                       :headers="['name', 'date']"
+                       :action="goto">
+        </content-table>
       </div>
       <p v-else>You will see the list of events you are registered to here.</p>
     </page-content>
@@ -28,7 +32,10 @@
       filteredEvents: function (filter) {
         return !!filter && filter !== '' ?
           this.events.filter(e => e.name.toLowerCase().indexOf(filter.toLowerCase()) !== -1) : this.events
-      }
+      },
+      goto: function (event) {
+        this.$router.push({name: 'eventDetails', params: {id: event.id}})
+      },
     },
   }
 </script>

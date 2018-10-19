@@ -26,6 +26,9 @@ export default {
     commit(EVENTS, [...state.events, event])
     return event
   },
+  getEvent: ({state}, id) => {
+    return state.events.find(ev => ev.id === id) || Promise.reject(`Cannot find event with id ${id}.`)
+  },
   getProfile: () => {
     return new Promise((resolve, reject) => {
       Vue.prototype.$keycloak.loadUserProfile()

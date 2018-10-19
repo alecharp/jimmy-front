@@ -59,6 +59,13 @@
 .jimmy-header {
   height: 80px;
   border-bottom: 1px solid #eee;
+
+  span.breadcrumb {
+    margin-left: 1em;
+    margin-right: 1em;
+    color: #d6d6d6;
+    font-size: 0.7em;
+  }
 }
 
 main article {

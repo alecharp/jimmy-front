@@ -5,15 +5,27 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    name: 'eventsListing',
-    component: () => import(/* webpackChunkName: 'Events' */ 'containers/EventsListing'),
     path: '/events',
+    component: () => import(/* webpackChunkName: 'Events' */ 'containers/Event'),
+    children: [
+      {
+        name: 'eventsListing',
+        path: '',
+        component: () => import(/* webpackChunkName: 'Events' */ 'containers/EventsListing'),
+      },
+      {
+        name: 'eventDetails',
+        path: ':id',
+        component: () => import(/* webpackChunkName: 'Events' */ 'containers/EventDetails'),
+      },
+      {
+        name: 'eventCreation',
+        path: 'create',
+        component: () => import(/* webpackChunkName: 'Events' */ 'containers/EventCreation'),
+      },
+    ],
   },
-  {
-    name: 'eventCreation',
-    component: () => import(/* webpackChunkName: 'Events' */ 'containers/EventCreation'),
-    path: '/events/create',
-  },
+
   {
     name: 'userProfile',
     component: () => import(/* webpackChunkName: 'User' */ 'containers/UserProfile'),
@@ -21,7 +33,7 @@ const routes = [
   },
   {
     path: '*',
-    redirect: '/events',
+    redirect: '/events/',
   }
 ]
 
