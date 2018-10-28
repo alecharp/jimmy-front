@@ -15,7 +15,7 @@ const common = {
   },
   module: {
     rules: [
-      {test: /\.vue$/, exclude: /node_modules/, use: 'vue-loader'},
+      { test: /\.vue$/, exclude: /node_modules/, use: 'vue-loader' },
       {
         test: /\.js$/,
         exclude: /node_modules/,
@@ -45,7 +45,7 @@ const common = {
   },
   resolve: {
     extensions: ['.js', '.vue', '.json', '.scss'],
-    modules: [ path.resolve(__dirname, 'src'), 'node_modules'],
+    modules: [path.resolve(__dirname, 'src'), 'node_modules'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js'
     },
