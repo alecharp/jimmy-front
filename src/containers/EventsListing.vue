@@ -5,7 +5,7 @@
     </page-header>
     <page-content>
       <div v-if="!!events && events.length !== 0">
-        <div>
+        <div class="actions">
           <input type="search" v-model.trim="filter" placeholder="Filter events by name"/>
         </div>
         <content-table class="top-2"

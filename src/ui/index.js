@@ -7,6 +7,7 @@ import {
   faUserCircle,
   faMinus,
   faChevronRight,
+  faCog,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon, FontAwesomeLayers, FontAwesomeLayersText } from '@fortawesome/vue-fontawesome'
 
@@ -16,6 +17,7 @@ library.add(
   faUserCircle,
   faMinus,
   faChevronRight,
+  faCog,
 )
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.component('font-awesome-layers', FontAwesomeLayers)

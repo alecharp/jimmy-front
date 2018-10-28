@@ -6,6 +6,9 @@
         <span class="breadcrumb"><font-awesome-icon icon="chevron-right"/></span>
         {{ event.name }}
       </h1>
+      <router-link class="btn" :to="{name: 'eventConfig', params: {id: event.id}}">
+        <font-awesome-icon icon="cog"/>
+      </router-link>
     </page-header>
     <page-content>
     </page-content>

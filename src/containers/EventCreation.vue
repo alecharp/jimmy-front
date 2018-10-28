@@ -27,7 +27,7 @@
         const {name} = this,
           event = {name}
         this.$store.dispatch('addEvent', event)
-          .then(event => this.$router.push({name: 'eventDetails', params: {id: event.id}}))
+          .then(event => this.$router.push({name: 'eventConfig', params: {id: event.id}}))
       },
       cancel: function () {
         this.$router.go(-1)
