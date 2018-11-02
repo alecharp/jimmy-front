@@ -1,4 +1,5 @@
 import {expect} from 'chai'
+import 'babel-polyfill'
 
 const actionsInjector = require('inject-loader!store/actions')
 
