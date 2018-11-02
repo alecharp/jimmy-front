@@ -11,14 +11,6 @@ import router from 'router'
 
 import 'ui'
 
-Vue.use(KeycloakVue, {
-  "realm": "jimmy",
-  "clientId": "jimmy-front",
-  "url": "http://localhost:8082/auth/",
-  "sslRequired": "external",
-  "cors": true
-})
-
 const requireComponent = require.context(
   './components',
   false,
@@ -31,11 +23,22 @@ requireComponent.keys().forEach(filename => {
   Vue.component(componentName, componentConfig.default || componentConfig)
 })
 
-new Vue({
-  router,
-  store,
-  components: {
-    App: () => import(/* webpackChunkName: 'App' */ 'components/App')
+Vue.use(KeycloakVue, {
+  config: {
+    "realm": "jimmy",
+    "clientId": "jimmy-front",
+    "url": "http://localhost:8082/auth/",
+    "sslRequired": "external",
+    "cors": true,
   },
-  el: '#jimmy'
+  onReady: () => {
+    new Vue({
+      router,
+      store,
+      components: {
+        App: () => import(/* webpackChunkName: 'App' */ 'components/App')
+      },
+      el: '#jimmy',
+    })
+  },
 })

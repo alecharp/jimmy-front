@@ -1,6 +1,6 @@
 import Keycloak from 'keycloak-js'
 
-const initConfig = {
+const defaultInitConfig = {
   onLoad: 'login-required',
   checkLoginIframe: false,
 }
@@ -11,15 +11,23 @@ export default {
     if (loaded) return
     loaded = true
 
-    const keycloak = Object.assign({}, Keycloak(options))
-    const init = () => keycloak.init(initConfig)
+    let update = null
+    const keycloak = Keycloak(options.config)
+    keycloak.init(options.init || defaultInitConfig)
+    keycloak.onAuthSuccess = () => {
+      update = setInterval(() => keycloak.updateToken(60), 10000)
+    }
+    keycloak.onReady = authenticated => {
+      if(authenticated) {
+        options.onReady && typeof options.onReady ===  'function' && options.onReady()
+      }
+    }
+    keycloak.onAuthRefreshError = () => clearInterval(update)
 
     Object.defineProperty(Vue.prototype, '$keycloak', {
       get() {
         return keycloak
       }
     })
-
-    init()
   },
 }
