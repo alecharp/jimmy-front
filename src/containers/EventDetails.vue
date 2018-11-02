@@ -6,24 +6,40 @@
         <span class="breadcrumb"><font-awesome-icon icon="chevron-right"/></span>
         {{ event.name }}
       </h1>
-      <router-link class="btn" :to="{name: 'eventConfig', params: {id: event.id}}">
+      <router-link v-if="canEdit" class="btn" :to="{name: 'eventConfig', params: {id: event.id}}">
         <font-awesome-icon icon="cog"/>
       </router-link>
     </page-header>
     <page-content>
+      <div class="actions flex flex-row justify-between">
+        <div class="flex flex-row flex-grow-1 justify-between">
+        </div>
+        <div class="flex flex-row justify-between">
+          <h4 v-if="event.date">
+            <font-awesome-icon icon="calendar-alt"/>
+            {{ event.date }}
+          </h4>
+        </div>
+      </div>
     </page-content>
   </div>
 </template>
 
 <script>
+  import Vue from 'vue'
   import store from 'store'
 
   export default {
     name: 'EventDetails',
-    data: () => ({event: null}),
+    data: () => ({event: null, canEdit: false}),
     beforeRouteEnter(to, from, next) {
       store.dispatch('getEvent', to.params.id)
-        .then(event => next(vm => vm.setEvent(event)))
+        .then(event => {
+          next(async vm => {
+            vm.setEvent(event)
+            vm.setCanEdit(event.owners.includes((await Vue.prototype.$keycloak.loadUserProfile()).email))
+          })
+        })
         .catch(next)
     },
     beforeRouteUpdate(to, from, next) {
@@ -38,6 +54,9 @@
     methods: {
       setEvent: function (event) {
         this.event = event
+      },
+      setCanEdit: function(canEdit) {
+        this.canEdit = canEdit
       },
     },
   }

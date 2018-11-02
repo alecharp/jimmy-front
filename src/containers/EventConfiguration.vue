@@ -10,13 +10,13 @@
       </h1>
     </page-header>
     <page-content>
-      <form @submit.once.prevent="updateEvent()" class="center">
-        <div class="flex flex-column flex-grow">
+      <form @submit.prevent="updateEvent()" class="center">
+        <div class="flex flex-column flex-grow-1">
           <label for="event-name">Name</label>
           <input id="event-name" placeholder="Event name" type="text" autofocus="autofocus"
                  v-model.lazy.trim="event.name"/>
         </div>
-        <div class="flex flex-column flex-grow top-1">
+        <div class="flex flex-column flex-grow-1 top-1">
           <label for="event-date">Date</label>
           <input id="event-date" placeholder="Event Date" type="date"
                  v-model.lazy.trim="event.date"/>
@@ -24,6 +24,9 @@
         <div class="controls">
           <button type="submit" :disabled="invalid" class="btn">Save</button>
           <button class="btn btn-danger" @click.prevent="cancel()">Cancel</button>
+        </div>
+        <div v-if="updateErr" class="flex danger flex-row flex-grow-1">
+          {{ updateErr }}
         </div>
       </form>
     </page-content>
@@ -39,7 +42,7 @@
       event: null,
       ref: null,
       invalid: true,
-      err: null,
+      updateErr: null,
     }),
     beforeRouteEnter(to, from, next) {
       store.dispatch('getEvent', to.params.id)
@@ -61,13 +64,15 @@
         this.ref = {...event}
       },
       updateEvent: function () {
-        this.$store.dispatch('updateEvent', this.event)
+        const {id, name, date} = this.event;
+        const event = {id, name, date}
+        this.$store.dispatch('updateEvent', event)
           .then(event => this.$router.push({name: 'eventDetails', params:{id: event.id}}))
-          .catch(err => this.err = err)
+          .catch(err => this.updateErr = err)
       },
       cancel: function () {
         this.$router.go(-1)
-      }
+      },
     },
     watch: {
       event: {

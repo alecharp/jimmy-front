@@ -1,3 +1,5 @@
+@import './colors';
+
 form.center {
   width: 50%;
   margin-left: auto;
@@ -20,4 +22,8 @@ label {
 
 .controls {
   margin-top: 2rem;
+}
+
+.danger {
+  color: $color-danger;
 }
