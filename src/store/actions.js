@@ -4,27 +4,54 @@ import {
   EVENTS,
 } from './mutations'
 
+const EVENTS_BASE_URI = '/api/events'
+
 /**
- * This is needed until the events are created by the backend, when a proper id is generated.
- * TODO: remove this once not required.
- *
- * @returns {string} a random string which will potentially be unique.
+ * Prepare the headers for any requests to the backend
+ * @returns {Headers} the headers for the request
  */
-export const uuid = () => {
-  let text = ''
-  for (let count = 0; count < 32; count++) {
-    let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-    text += chars.charAt(Math.floor(Math.random() * chars.length))
+const headers = () => {
+  return new Headers({
+    'Authorization': `Bearer ${Vue.prototype.$keycloak.token}`,
+    'Content-Type': 'application/json',
+  })
+}
+
+/**
+ * Perform a 'GET' request to a specific URI and returns its JSON response.
+ * @param uri the URI to reach.
+ * @returns {Promise<*>} will resolve to response content and reject with the response error.
+ */
+const get = async (uri) => {
+  const resp = await fetch(uri, {method: 'GET', headers: headers()})
+  if (resp.ok) {
+    return resp.json()
   }
-  return text
+  return Promise.reject(await resp.json())
+}
+
+/**
+ * Perform a 'POST' request to a specific URI and returns its JSON response.
+ * @param uri the URI to reach.
+ * @param data the object to send to the URI. Data will be JSONify.
+ * @returns {Promise<*>} will resolve to response content and reject with the response error.
+ */
+const post = async (uri, data) => {
+  const resp = await fetch(uri, {method: 'POST', headers: headers(), body: JSON.stringify(data)})
+  if(resp.ok) {
+    return resp.json()
+  }
+  return Promise.reject(await resp.json())
 }
 
 export default {
-  addEvent: ({commit, state}, event) => {
-    // TODO remove this once event creation is done in backend
-    event = {...event, id: uuid()}
-    commit(EVENTS, [...state.events, event])
-    return event
+  getEvents: async ({commit}) => {
+    return commit(EVENTS, [...await get(`${EVENTS_BASE_URI}`)])
+  },
+  addEvent: async ({commit, state}, event) => {
+    const newEvent = await post(`${EVENTS_BASE_URI}`, event)
+    commit(EVENTS, [...state.events, newEvent])
+    return newEvent
   },
   getEvent: ({state}, id) => {
     return state.events.find(ev => ev.id === id) || Promise.reject(`Cannot find event with id ${id}.`)

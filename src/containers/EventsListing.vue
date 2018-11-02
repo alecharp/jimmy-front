@@ -21,10 +21,18 @@
 
 <script>
   import {mapState} from 'vuex'
+  import store from 'store'
 
   export default {
     name: 'EventsListing',
     data: () => ({filter: null}),
+    beforeRouteEnter: (to, from, next) => {
+      store.dispatch('getEvents')
+        .then(next)
+        .catch(e => {
+          console.debug(e)
+        })
+    },
     computed: {
       ...mapState(['events']),
     },
