@@ -6,7 +6,7 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/events',
-    component: () => import(/* webpackChunkName: 'Events' */ 'containers/Event'),
+    component: () => import(/* webpackChunkName: 'Events' */ 'components/Event'),
     children: [
       {
         name: 'eventsListing',

@@ -30,6 +30,15 @@
         .then(profile => next(vm => vm.setProfile(profile)))
         .catch(next)
     },
+    beforeRouteUpdate(to, from, next) {
+      this.event = null
+      this.$store.dispatch('getProfile')
+        .then(profile => {
+          this.setProfile(profile)
+          next()
+        })
+        .catch(next)
+    },
     methods: {
       setProfile(profile) {
         this.profile = profile

@@ -18,7 +18,6 @@
 </template>
 
 <script>
-
   export default {
     name: 'EventCreation',
     data: () => ({invalid: true, name: null}),

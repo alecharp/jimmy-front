@@ -28,7 +28,6 @@
     },
     beforeRouteUpdate(to, from, next) {
       this.event = null
-      console.log(arguments)
       this.$store.dispatch('getEvent', to.params.id)
         .then(event => {
           this.setEvent(event)
