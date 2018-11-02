@@ -73,10 +73,23 @@ const development = {
 
 const production = {
   mode: 'production',
-  devtool: 'inline-cheap-module-source-map',
+  devtool: 'cheap-module-source-map',
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendors: {
+          test: /node_modules/,
+          name: 'vendors',
+          chunks: 'all',
+        },
+      },
+    },
+  },
 };
 
 module.exports = env => {
-  if (env === 'dev') return merge(common, development);
-  return merge(common, production);
+  switch (env) {
+    case 'production': return merge(common, production)
+    default: return merge(common, development)
+  }
 };
