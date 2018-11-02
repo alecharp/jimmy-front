@@ -14,7 +14,7 @@
     "url": "git+https://github.com/alecharp/jimmy-front.git"
   },
   "author": "Adrien Lecharpentier <adrien.lecharpentier@gmail.com>",
-  "license": "MIT",
+  "license": "Apache v2",
   "bugs": {
     "url": "https://github.com/alecharp/jimmy-front/issues"
   },

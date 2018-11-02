@@ -1,5 +1,7 @@
 {
   "name": "jimmy-server",
+  "author": "Adrien Lecharpentier <adrien.lecharpentier@gmail.com>",
+  "license": "Apache v2",
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
