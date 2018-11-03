@@ -11,7 +11,7 @@ RUN adduser -h /srv/jimmy -D jimmy jimmy
 WORKDIR /srv/jimmy
 USER jimmy
 
-ARG PORT
+ARG PORT=4000
 ENV PORT ${PORT}
 EXPOSE ${PORT}
 
@@ -20,4 +20,4 @@ COPY --from=builder --chown=jimmy:jimmy /src/jimmy/package.json /src/jimmy/serve
 
 CMD npm start
 
-COPY dist /srv/jimmy/dist
+COPY --chown=jimmy:jimmy dist /srv/jimmy/dist
