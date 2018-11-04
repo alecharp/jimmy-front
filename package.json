@@ -23,7 +23,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.8",
     "@fortawesome/free-solid-svg-icons": "^5.5.0",
     "@fortawesome/vue-fontawesome": "^0.1.2",
-    "keycloak-js": "^4.5.0",
+    "keycloak-js": "^4.4.0",
     "lodash": "^4.17.11",
     "vue": "^2.5.17",
     "vue-router": "^3.0.1",
