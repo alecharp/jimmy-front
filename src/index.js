@@ -39,14 +39,15 @@ requireComponent.keys().forEach(filename => {
   Vue.component(componentName, componentConfig.default || componentConfig)
 })
 
+const keycloakConfig = {
+  "realm": `${process.env.KEYCLOAK_REALM || 'jimmy'}`,
+  "clientId": `${process.env.KEYCLOAK_CLIENT_ID || 'jimmy-front'}`,
+  "url": `${process.env.KEYCLOAK_URL || 'http://localhost:8082/auth'}`,
+  "sslRequired": "external",
+}
+
 Vue.use(KeycloakVue, {
-  config: {
-    "realm": "jimmy",
-    "clientId": "jimmy-front",
-    "url": "http://localhost:8082/auth/",
-    "sslRequired": "external",
-    "cors": true,
-  },
+  config: keycloakConfig,
   onReady: () => {
     new Vue({
       router,
