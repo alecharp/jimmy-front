@@ -36,29 +36,14 @@
 </template>
 
 <script>
-  import store from 'store'
+  import {mapState} from 'vuex'
 
   export default {
     name: 'UserProfile',
-    data: () => ({profile: null}),
-    beforeRouteEnter(to, from, next) {
-      store.dispatch('getProfile')
-        .then(profile => next(vm => vm.setProfile(profile)))
-        .catch(next)
-    },
-    beforeRouteUpdate(to, from, next) {
-      this.event = null
-      this.$store.dispatch('getProfile')
-        .then(profile => {
-          this.setProfile(profile)
-          next()
-        })
-        .catch(next)
+    computed: {
+      ...mapState(['profile'])
     },
     methods: {
-      setProfile(profile) {
-        this.profile = profile
-      },
       accountUrl() {
         return this.$keycloak.createAccountUrl()
       },

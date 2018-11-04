@@ -52,7 +52,7 @@ Vue.use(KeycloakVue, {
       router,
       store,
       components: {
-        App: () => import(/* webpackChunkName: 'App' */ 'components/App')
+        App: () => import(/* webpackChunkName: 'App' */ 'containers/App')
       },
       el: '#jimmy',
     })

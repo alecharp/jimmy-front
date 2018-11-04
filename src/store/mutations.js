@@ -15,9 +15,13 @@
  */
 
 export const EVENTS = 'EVENTS'
+export const USER_PROFILE = 'USER_PROFILE'
 
 export default {
   [EVENTS](state, events) {
     state.events = events
+  },
+  [USER_PROFILE](state, profile) {
+    state.profile = profile
   },
 }

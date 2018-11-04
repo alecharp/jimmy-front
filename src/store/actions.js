@@ -18,6 +18,7 @@ import Vue from 'vue'
 
 import {
   EVENTS,
+  USER_PROFILE,
 } from './mutations'
 
 const EVENTS_BASE_URI = '/api/events'
@@ -110,10 +111,13 @@ export default {
     commit(EVENTS, [...events])
     return newEvent
   },
-  getProfile: () => {
+  getProfile: ({commit}) => {
     return new Promise((resolve, reject) => {
       Vue.prototype.$keycloak.loadUserProfile()
-        .success(resolve)
+        .success(profile => {
+          commit(USER_PROFILE, profile)
+          resolve(profile)
+        })
         .error(reject)
     })
   },

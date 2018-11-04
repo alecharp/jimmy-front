@@ -42,7 +42,6 @@
 </template>
 
 <script>
-  import Vue from 'vue'
   import store from 'store'
 
   export default {
@@ -53,7 +52,7 @@
         .then(event => {
           next(async vm => {
             vm.setEvent(event)
-            vm.setCanEdit(event.owners.includes((await Vue.prototype.$keycloak.loadUserProfile()).email))
+            vm.setCanEdit(event.owners.includes(store.state.profile.email))
           })
         })
         .catch(next)

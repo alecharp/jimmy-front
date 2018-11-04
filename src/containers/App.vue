@@ -28,12 +28,17 @@
 </template>
 
 <script>
+  import store from 'store'
+
   export default {
     name: 'App',
     components: {
       AppMenu: () => import(/* webpackChunkName: 'App' */ 'components/AppMenu'),
     },
     data: () => ({expended: false}),
+    beforeCreate: async () => {
+      await store.dispatch('getProfile')
+    },
     methods: {
       expend: function() { this.expended = !this.expended },
       width: function() { return this.expended ? '280px' : '64px' },
