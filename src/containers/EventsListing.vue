@@ -17,7 +17,7 @@
 <template>
   <div>
     <page-header class="justify-between" title="Events">
-      <router-link class="btn" :to="{name: 'eventCreation'}">Create</router-link>
+      <router-link v-if="canCreate()" class="btn" :to="{name: 'eventCreation'}">Create</router-link>
     </page-header>
     <page-content>
       <div v-if="!!events && events.length !== 0">
@@ -60,6 +60,9 @@
       goto: function (event) {
         this.$router.push({name: 'eventDetails', params: {id: event.id}})
       },
+      canCreate: function() {
+        return this.$keycloak.hasRealmRole('ROLE_EVENT_PLANNER')
+      }
     },
   }
 </script>

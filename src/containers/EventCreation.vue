@@ -34,9 +34,17 @@
 </template>
 
 <script>
+  import Vue from 'vue'
+
   export default {
     name: 'EventCreation',
     data: () => ({invalid: true, name: null}),
+    beforeRouteEnter(to, from, next) {
+      if (!Vue.prototype.$keycloak.hasRealmRole('ROLE_EVENT_PLANNER')) {
+        next(false)
+      }
+      next()
+    },
     methods: {
       createEvent: function () {
         const {name} = this,
