@@ -37,7 +37,10 @@
     },
     data: () => ({expended: false}),
     beforeCreate: async () => {
-      await store.dispatch('getProfile')
+      try {
+        await store.dispatch('getCsrfToken')
+        await store.dispatch('getProfile')
+      } catch(ex) {}
     },
     methods: {
       expend: function() { this.expended = !this.expended },

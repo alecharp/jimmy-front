@@ -46,7 +46,6 @@ const routes = [
       },
     ],
   },
-
   {
     name: 'userProfile',
     component: () => import(/* webpackChunkName: 'User' */ 'containers/UserProfile'),

@@ -14,10 +14,14 @@
  * limitations under the License.
  */
 
+export const CSRF_TOKEN = 'CSRF_TOKEN'
 export const EVENTS = 'EVENTS'
 export const USER_PROFILE = 'USER_PROFILE'
 
 export default {
+  [CSRF_TOKEN](state, csrfToken) {
+    state.csrfToken = csrfToken
+  },
   [EVENTS](state, events) {
     state.events = events
   },

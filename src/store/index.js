@@ -26,6 +26,7 @@ Vue.use(Vuex)
 const debug = process.env.NODE_ENV !== 'production'
 
 const state = {
+  csrfToken: null,
   events: [],
   profile: {},
 }

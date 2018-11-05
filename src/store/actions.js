@@ -15,23 +15,28 @@
  */
 
 import Vue from 'vue'
+import store from 'store'
 
 import {
+  CSRF_TOKEN,
   EVENTS,
   USER_PROFILE,
 } from './mutations'
 
-const EVENTS_BASE_URI = '/api/events'
+const REST_BASE_URI = `/api`
+const EVENTS_BASE_URI = `${REST_BASE_URI}/events`
+const PING_BASE_URI = `${REST_BASE_URI}/ping`
 
 /**
  * Prepare the headers for any requests to the backend
  * @returns {Headers} the headers for the request
  */
-const headers = () => {
+const headers = (csrfToken = store.state.csrfToken) => {
   return new Headers({
     'Authorization': `Bearer ${Vue.prototype.$keycloak.token}`,
     'Accept': 'application/json',
     'Content-Type': 'application/json',
+    'X-CSRF-TOKEN': csrfToken,
   })
 }
 
@@ -45,13 +50,13 @@ const get = async (uri) => {
   if (resp.ok) {
     return resp.json()
   }
-  return Promise.reject(await resp.json())
+  return Promise.reject(resp)
 }
 
 /**
  * Perform a 'POST' request to a specific URI and returns its JSON response.
  * @param uri the URI to reach.
- * @param data the object to send to the URI. Data will be JSONify.
+ * @param data the object to send to the URI. Data will be JSONified.
  * @returns {Promise<*>} will resolve to the response content and reject with the response error.
  */
 const post = async (uri, data) => {
@@ -120,5 +125,15 @@ export default {
         })
         .error(reject)
     })
+  },
+  getCsrfToken: async ({commit}) => {
+    try {
+      const respHeaders = await fetch(`${PING_BASE_URI}`, {method: 'GET', headers: headers()})
+        .then(resp => resp.ok ? resp.headers : Promise.reject(resp.headers))
+      if(respHeaders.has('X-CSRF-TOKEN')) {
+        commit(CSRF_TOKEN, respHeaders.get('X-CSRF-TOKEN'))
+      }
+    } catch (ex) {
+    }
   },
 }
