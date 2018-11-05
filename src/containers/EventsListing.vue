@@ -21,8 +21,11 @@
     </page-header>
     <page-content>
       <div v-if="!!events && events.length !== 0">
-        <div class="actions">
+        <div class="actions flex flex-row flex-grow-1 justify-between">
           <input type="search" v-model.trim="filter" placeholder="Filter events by name"/>
+          <button class="btn" @click.prevent="getEvents()">
+            <font-awesome-icon icon="sync"/>
+          </button>
         </div>
         <content-table class="top-2"
                        :items="filteredEvents(this.filter)"
@@ -36,7 +39,7 @@
 </template>
 
 <script>
-  import {mapState} from 'vuex'
+  import {mapState, mapActions} from 'vuex'
   import store from 'store'
 
   export default {
@@ -45,14 +48,13 @@
     beforeRouteEnter: (to, from, next) => {
       store.dispatch('getEvents')
         .then(next)
-        .catch(e => {
-          console.debug(e)
-        })
+        .catch(() => next(false))
     },
     computed: {
       ...mapState(['events']),
     },
     methods: {
+      ...mapActions(['getEvents']),
       filteredEvents: function (filter) {
         return !!filter && filter !== '' ?
           this.events.filter(e => e.name.toLowerCase().indexOf(filter.toLowerCase()) !== -1) : this.events
