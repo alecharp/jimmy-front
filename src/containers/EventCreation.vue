@@ -40,10 +40,7 @@
     name: 'EventCreation',
     data: () => ({invalid: true, name: null}),
     beforeRouteEnter(to, from, next) {
-      if (!Vue.prototype.$keycloak.hasRealmRole('ROLE_EVENT_PLANNER')) {
-        next(false)
-      }
-      next()
+      next(Vue.prototype.$keycloak.hasRealmRole('ROLE_EVENT_PLANNER'))
     },
     methods: {
       createEvent: function () {

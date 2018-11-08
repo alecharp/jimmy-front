@@ -62,7 +62,10 @@
     }),
     beforeRouteEnter(to, from, next) {
       store.dispatch('getEvent', to.params.id)
-        .then(event => next(vm => vm.setEvent(event)))
+        .then(event => {
+          event.owners.includes(store.state.profile.email) ?
+            next(vm => vm.setEvent(event)) : next(false)
+        })
         .catch(next)
     },
     beforeRouteUpdate(to, from, next) {
