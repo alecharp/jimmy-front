@@ -7,7 +7,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 const common = {
   entry: {
-    index: './src/index.js',
+    index: ['@babel/polyfill', './src/index.js'],
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -71,6 +71,10 @@ const development = {
   }
 };
 
+const test = {
+  mode: 'production',
+}
+
 const production = {
   mode: 'production',
   devtool: 'cheap-module-source-map',
@@ -89,7 +93,8 @@ const production = {
 
 module.exports = env => {
   switch (env) {
-    case 'production': return merge(common, production)
-    default: return merge(common, development)
+    case 'dev': return merge(common, development)
+    case 'test': return merge(common, test)
+    default: return merge(common, production)
   }
 };

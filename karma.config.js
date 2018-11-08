@@ -5,6 +5,7 @@ module.exports = config => {
     basePath: '.',
     frameworks: ['mocha'],
     files: [
+      'node_modules/@babel/polyfill/dist/polyfill.js',
       'test/**/*.spec.js',
     ],
     browsers: ['Chrome', 'Firefox'],

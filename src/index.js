@@ -18,8 +18,6 @@ import Vue from 'vue'
 import upperFirst from 'lodash/upperFirst'
 import camelCase from 'lodash/camelCase'
 
-import 'babel-polyfill'
-
 import KeycloakVue from './KeycloakVue'
 
 import store from 'store'
