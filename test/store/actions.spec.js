@@ -22,13 +22,46 @@ const actionsInjector = require('inject-loader!store/actions')
 const actions = actionsInjector({}).default
 
 describe('actions', () => {
-  it('should be able to provide a promise to get the user profile', () => {
-    expect(actions).to.have.a.property('getProfile')
-    expect(actions.getProfile).to.be.a('function')
+  describe('getEvents', () => {
+    it('should be a function', () => {
+      expect(actions.getEvents).to.be.a('function')
+    })
+    it('should change the state', () => {
+      const state = {events: []}
+      const commit = (type, events) => {
+        expect(type).to.be.equal.to(MUTATIONS.EVENTS)
+      }
+      actions.getEvents({commit, state})
+    })
   })
 
-  it('should be able to add events to the state', () => {
-    expect(actions).to.have.a.property('addEvent')
-    expect(actions.addEvent).to.be.a('function')
+  describe('addEvent', () => {
+    it('should be a function', () => {
+      expect(actions.addEvent).to.be.a('function')
+    })
+  })
+
+  describe('getEvent', () => {
+    it('should be a function', () => {
+      expect(actions.getEvent).to.be.a('function')
+    })
+  })
+
+  describe('updateEvent', () => {
+    it('should be a function', () => {
+      expect(actions.updateEvent).to.be.a('function')
+    })
+  })
+
+  describe('getProfile', () => {
+    it('should be a function', () => {
+      expect(actions.getProfile).to.be.a('function')
+    })
+  })
+
+  describe('getCsrfToken', () => {
+    it('should be a function', () => {
+      expect(actions.getCsrfToken).to.be.a('function')
+    })
   })
 })
