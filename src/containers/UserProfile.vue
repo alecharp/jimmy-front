@@ -21,8 +21,7 @@
       <h4>Your user profile</h4>
       <p class="top-2">You can find here your user profile. </p>
       <div class="flex flex-row top-2" v-if="!!profile">
-        <p>Name: <b>{{ profile.firstName }} {{profile.lastName }}</b></p>
-        <p class="left-2">Username: <b>{{ profile.username }}</b></p>
+        <p>Name: <b>{{ profile.name }} </b></p>
         <p class="left-2">Email: <b>{{ profile.email }}</b></p>
       </div>
       <p class="top-2 flex flex-column">

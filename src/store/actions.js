@@ -118,7 +118,7 @@ export default {
   },
   getProfile: ({commit}) => {
     return new Promise((resolve, reject) => {
-      Vue.prototype.$keycloak.loadUserProfile()
+      Vue.prototype.$keycloak.loadUserInfo()
         .success(profile => {
           commit(USER_PROFILE, profile)
           resolve(profile)
