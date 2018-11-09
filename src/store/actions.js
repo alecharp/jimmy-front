@@ -62,9 +62,9 @@ const get = async (uri) => {
 const post = async (uri, data) => {
   const resp = await fetch(uri, {method: 'POST', headers: headers(), body: JSON.stringify(data)})
   if(resp.ok) {
-    return resp.json()
+    return await resp.json()
   }
-  return Promise.reject(await resp.json())
+  return Promise.reject(resp)
 }
 
 /**
@@ -119,7 +119,9 @@ export default {
   getProfile: ({commit}) => {
     return new Promise((resolve, reject) => {
       Vue.prototype.$keycloak.loadUserInfo()
-        .success(profile => {
+        .success(resp => {
+          const {email, name, locale, sub:id} = resp
+          const profile = {email, name, locale, id}
           commit(USER_PROFILE, profile)
           resolve(profile)
         })

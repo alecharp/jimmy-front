@@ -25,7 +25,7 @@
         <p class="left-2">Email: <b>{{ profile.email }}</b></p>
       </div>
       <p class="top-2 flex flex-column">
-        <a :href="accountUrl()" target="_blank">
+        <a :href="accountUrl()">
           Redirect to account management
           <font-awesome-icon icon="chevron-right" style="height: 0.8em"/>
         </a>

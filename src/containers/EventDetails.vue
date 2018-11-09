@@ -52,17 +52,8 @@
         .then(event => {
           next(async vm => {
             vm.setEvent(event)
-            vm.setCanEdit(event.owners.includes(store.state.profile.email))
+            vm.setCanEdit(event.owners.includes(store.state.profile.id))
           })
-        })
-        .catch(next)
-    },
-    beforeRouteUpdate(to, from, next) {
-      this.event = null
-      this.$store.dispatch('getEvent', to.params.id)
-        .then(event => {
-          this.setEvent(event)
-          next()
         })
         .catch(next)
     },

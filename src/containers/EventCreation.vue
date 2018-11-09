@@ -28,6 +28,7 @@
           <button type="submit" :disabled="invalid" class="btn">Create new event</button>
           <button class="btn btn-danger" @click.prevent="cancel()">Cancel</button>
         </div>
+        <div class="danger" v-if="error">{{ error }}</div>
       </form>
     </page-content>
   </div>
@@ -38,7 +39,7 @@
 
   export default {
     name: 'EventCreation',
-    data: () => ({invalid: true, name: null}),
+    data: () => ({invalid: true, name: null, error: null}),
     beforeRouteEnter(to, from, next) {
       next(Vue.prototype.$keycloak.hasRealmRole('ROLE_EVENT_PLANNER'))
     },
@@ -48,6 +49,7 @@
           event = {name}
         this.$store.dispatch('addEvent', event)
           .then(event => this.$router.push({name: 'eventConfig', params: {id: event.id}}))
+          .catch(err => this.error = err)
       },
       cancel: function () {
         this.$router.go(-1)
