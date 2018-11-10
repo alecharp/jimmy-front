@@ -45,6 +45,11 @@
           {{ updateErr }}
         </div>
       </form>
+      <form class="center top-1">
+        <button class="btn btn-danger" @click.prevent="removeEvent(event.id)">
+          Remove event
+        </button>
+      </form>
     </page-content>
   </div>
 </template>
@@ -82,6 +87,10 @@
       },
       cancel: function () {
         this.$router.go(-1)
+      },
+      removeEvent: function () {
+        this.$store.dispatch('removeEvent', this.event.id)
+          .then(this.$router.push({name: 'eventsListing'}))
       },
     },
     watch: {

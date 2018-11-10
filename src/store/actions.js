@@ -88,7 +88,7 @@ const put = async (uri, data) => {
  */
 const remove = async (uri) => {
   const resp = await fetch(uri, {method: 'DELETE', headers: headers()})
-  return resp.json()
+  return resp.ok
 }
 
 export default {
@@ -115,6 +115,14 @@ export default {
     events.splice(eventIndex, 1, newEvent)
     commit(EVENTS, [...events])
     return newEvent
+  },
+  removeEvent: async ({dispatch}, id) => {
+    try {
+      remove(`${EVENTS_BASE_URI}/${id}`)
+      return await dispatch('getEvents')
+    } catch (e) {
+      return Promise.reject(e)
+    }
   },
   getProfile: ({commit}) => {
     return new Promise((resolve, reject) => {
