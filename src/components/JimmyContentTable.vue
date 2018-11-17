@@ -42,7 +42,7 @@
       headers: {required: true, type: Array,},
       items: {required: true, type: Array,},
       itemsKey: {required: false, type: String, default: 'id',},
-      action: {required: false, type: Function, default: 'null',}
+      action: {required: false, type: Function, default: null,}
     },
     methods: {
       headerLabel: header => typeof(header) === 'object' ? header.label : capitalize(header),
