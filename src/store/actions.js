@@ -118,8 +118,8 @@ export default {
   },
   removeEvent: async ({dispatch}, id) => {
     try {
-      remove(`${EVENTS_BASE_URI}/${id}`)
-      return await dispatch('getEvents')
+      await remove(`${EVENTS_BASE_URI}/${id}`)
+      return dispatch('getEvents')
     } catch (e) {
       return Promise.reject(e)
     }
