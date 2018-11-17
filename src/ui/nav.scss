@@ -22,7 +22,7 @@ $nav-bg-color: #1c314a;
 
 .nav-space {
   height: 100vh;
-  transition: width $nav-transition;
+  transition: width $nav-transition, min-width $nav-transition;
   min-width: $nav-min-width;
 }
 
@@ -44,7 +44,7 @@ $nav-bg-color: #1c314a;
   height: 100vh;
   min-width: $nav-min-width;
   position: fixed;
-  transition: width $nav-transition;
+  transition: width $nav-transition, min-width $nav-transition;
 
   .logo-item {
     margin: 20px 10px 20px 23px;
