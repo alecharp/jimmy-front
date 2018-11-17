@@ -29,23 +29,23 @@
       <form @submit.prevent="updateEvent()" class="center">
         <div class="flex flex-column flex-grow-1">
           <label for="event-name">Name</label>
-          <input id="event-name" placeholder="Event name" type="text" autofocus="autofocus"
+          <input id="event-name" placeholder="Event name" type="text" autofocus="autofocus" required="required"
                  v-model.lazy.trim="event.name"/>
         </div>
         <div class="flex flex-column flex-grow-1 top-1">
           <label for="event-date">Date</label>
-          <input id="event-date" placeholder="Event Date" type="date"
+          <input id="event-date" placeholder="Event Date" type="date" required="required"
                  v-model.lazy.trim="event.date"/>
         </div>
         <div class="controls">
           <button type="submit" :disabled="invalid" class="btn">Save</button>
           <button class="btn btn-danger" @click.prevent="cancel()">Cancel</button>
         </div>
-        <div v-if="updateErr" class="flex danger flex-row flex-grow-1">
+        <div v-if="updateErr" class="flex danger flex-row flex-grow-1 top-1">
           {{ updateErr }}
         </div>
       </form>
-      <form class="center top-1">
+      <form class="center top-2">
         <button class="btn btn-danger" @click.prevent="removeEvent(event.id)">
           Remove event
         </button>
@@ -73,10 +73,18 @@
         })
         .catch(next)
     },
+    beforeRouteLeave(to, from, next) {
+      if(this.event === null || this.event.name === null || this.event.name === '' || this.event.date === null) {
+        next(false)
+        this.updateErr = "All fields must be filled."
+      } else {
+        next()
+      }
+    },
     methods: {
       setEvent: function (event) {
         this.event = {...event}
-        this.ref = {...event}
+        this.ref = event
       },
       updateEvent: function () {
         const {id, name, date} = this.event;
