@@ -39,7 +39,7 @@ const routes = [
       {
         name: 'eventDetails',
         path: ':id',
-        component: () => import(/* webpackChunkName: 'Events' */ 'containers/EventDetails'),
+        component: () => import(/* webpackChunkName: 'Events' */ 'containers/Event'),
       },
       {
         name: 'eventConfig',
