@@ -54,19 +54,17 @@
   align-items: center;
 }
 
-.padding-4 {
-  padding-left: 4rem;
-  padding-right: 4rem;
-}
-
-@for $i from 1 through 3 {
+@for $i from 1 through 4 {
+  .padding-#{$i} {
+    padding-left: 1rem * $i;
+    padding-right: 1rem * $i;
+  }
   .top-#{$i} {
     margin-top: 1rem * $i;
   }
-}
-
-.left-2 {
-  margin-left: 2rem;
+  .left-#{$i} {
+    margin-left: 1rem * $i;
+  }
 }
 
 .jimmy-container {
