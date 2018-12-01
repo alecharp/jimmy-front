@@ -22,9 +22,11 @@
         <span class="breadcrumb"><font-awesome-icon icon="chevron-right"/></span>
         {{ event.name }}
       </h1>
-      <router-link v-if="canEdit" class="btn" :to="{name: 'eventConfig', params: {id: event.id}}">
-        <font-awesome-icon icon="cog"/>
-      </router-link>
+      <div>
+        <router-link v-if="canEdit" class="btn" :to="{name: 'eventConfig', params: {id: event.id}}">
+          <font-awesome-icon icon="cog"/>
+        </router-link>
+      </div>
     </page-header>
     <page-content>
       <div class="actions flex flex-row justify-between">

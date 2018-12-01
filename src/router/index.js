@@ -55,7 +55,7 @@ const routes = [
   },
   {
     path: '*',
-    redirect: '/events/',
+    redirect: '/events',
   }
 ]
 

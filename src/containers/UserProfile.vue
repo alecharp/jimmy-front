@@ -20,9 +20,9 @@
     <page-content>
       <h4>Your user profile</h4>
       <p class="top-2">You can find here your user profile. </p>
-      <div class="flex flex-row top-2" v-if="!!profile">
+      <div class="flex flex-row top-2 items-center" v-if="!!profile">
         <p>Name: <b>{{ profile.name }} </b></p>
-        <p class="left-2">Email: <b>{{ profile.email }}</b></p>
+        <p class="left-1">Email: <b>{{ profile.email }}</b></p>
       </div>
       <p class="top-2 flex flex-column">
         <a :href="accountUrl()">
