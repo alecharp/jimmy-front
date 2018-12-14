@@ -16,9 +16,7 @@
 
 <template>
   <main>
-    <article>
-      <slot></slot>
-    </article>
+    <slot></slot>
   </main>
 </template>
 

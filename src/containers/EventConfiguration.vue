@@ -20,36 +20,19 @@
       <h1>
         <router-link :to="{name: 'eventsListing'}">Events</router-link>
         <span class="breadcrumb"><font-awesome-icon icon="chevron-right"/></span>
-        <router-link :to="{name: 'eventDetails', params:{id: ref.id}}">{{ ref.name }}</router-link>
+        <router-link :to="{name: 'eventDetails', params:{id: event.id}}">{{ event.name }}</router-link>
         <span class="breadcrumb"><font-awesome-icon icon="chevron-right"/></span>
         Configuration
       </h1>
     </page-header>
-    <page-content>
-      <form @submit.prevent="updateEvent()" class="center">
-        <div class="flex flex-column flex-grow-1">
-          <label for="event-name">Name</label>
-          <input id="event-name" placeholder="Event name" type="text" autofocus="autofocus" required="required"
-                 v-model.lazy.trim="event.name"/>
-        </div>
-        <div class="flex flex-column flex-grow-1 top-1">
-          <label for="event-date">Date</label>
-          <input id="event-date" placeholder="Event Date" type="date" required="required"
-                 v-model.lazy.trim="event.date"/>
-        </div>
-        <div class="controls">
-          <button type="submit" :disabled="invalid" class="btn">Save</button>
-          <button class="btn btn-danger" @click.prevent="cancel()">Cancel</button>
-        </div>
-        <div v-if="updateErr" class="flex danger flex-row flex-grow-1 top-1">
-          {{ updateErr }}
-        </div>
-      </form>
-      <form class="center top-2">
-        <button class="btn btn-danger" @click.prevent="removeEvent(event.id)">
-          Remove event
-        </button>
-      </form>
+    <page-content class="flex flex-row flex-grow-1">
+      <div class="settings-menu">
+        <router-link :to="{name: 'eventConfig', params: {id: event.id}}">Details</router-link>
+        <router-link :to="{name: 'eventDeletion', params: {id: event.id}}">Remove</router-link>
+      </div>
+      <div class="flex-grow-1">
+        <router-view></router-view>
+      </div>
     </page-content>
   </div>
 </template>
@@ -61,52 +44,19 @@
     name: 'EventConfiguration',
     data: () => ({
       event: null,
-      ref: null,
-      invalid: true,
-      updateErr: null,
     }),
-    beforeRouteEnter(to, from, next) {
-      store.dispatch('getEvent', to.params.id)
-        .then(event => {
-          event.owners.includes(store.state.profile.id) ?
-            next(vm => vm.setEvent(event)) : next(false)
-        })
-        .catch(next)
-    },
-    beforeRouteLeave(to, from, next) {
-      if(this.event === null || this.event.name === null || this.event.name === '' || this.event.date === null) {
-        next(false)
-        this.updateErr = "All fields must be filled."
-      } else {
-        next()
+    beforeRouteEnter: async (to, from, next) => {
+      try {
+        const event = await store.dispatch('getEvent', to.params.id)
+        event.owners.includes(store.state.profile.id) ?
+          next(vm => vm.setEvent(event)) : next(false)
+      } catch (e) {
+        next(e)
       }
     },
     methods: {
       setEvent: function (event) {
         this.event = {...event}
-        this.ref = event
-      },
-      updateEvent: function () {
-        const {id, name, date} = this.event;
-        const event = {id, name, date}
-        this.$store.dispatch('updateEvent', event)
-          .then(event => this.$router.push({name: 'eventDetails', params:{id: event.id}}))
-          .catch(err => this.updateErr = err)
-      },
-      cancel: function () {
-        this.$router.go(-1)
-      },
-      removeEvent: function () {
-        this.$store.dispatch('removeEvent', this.event.id)
-          .then(this.$router.push({name: 'eventsListing'}))
-      },
-    },
-    watch: {
-      event: {
-        handler: function (newEvent) {
-          this.invalid = newEvent.name === '' || !newEvent.date || newEvent.date === ''
-        },
-        deep: true,
       },
     },
   }

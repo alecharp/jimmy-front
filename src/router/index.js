@@ -42,9 +42,20 @@ const routes = [
         component: () => import(/* webpackChunkName: 'Events' */ 'containers/Event'),
       },
       {
-        name: 'eventConfig',
         path: ':id/configure',
         component: () => import(/* webpackChunkName: 'Events' */ 'containers/EventConfiguration'),
+        children: [
+          {
+            name: 'eventConfig',
+            path: '',
+            component: () => import(/* webpackChunckName: 'Event' */ 'containers/EventConfigurationDetails'),
+          },
+          {
+            name: 'eventDeletion',
+            path: 'delete',
+            component: () => import(/* webpackChunckName: 'Event' */ 'containers/EventConfigurationDeletion'),
+          },
+        ],
       },
     ],
   },
