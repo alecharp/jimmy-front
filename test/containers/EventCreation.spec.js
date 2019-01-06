@@ -24,6 +24,5 @@ describe('EventCreation', () => {
   })
   it('should have router guards', () => {
     expect(EventCreation.beforeRouteEnter).to.be.a('function')
-    expect(EventCreation.beforeRouteUpdate).to.be.a('function')
   })
 })
