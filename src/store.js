@@ -22,12 +22,11 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    logout(context) {
-      return auth.signOut()
-        .then(() => {
-          context.commit(USER_MUTATION, { isAnonymous: true });
-        });
-    },
+    logout: context => auth.signOut()
+      .then(() => {
+        context.commit(USER_MUTATION, { isAnonymous: true });
+      })
+    ,
   },
   getters: {
     isAuthenticated: state => () => state.user && !state.user.isAnonymous,

@@ -1,5 +1,5 @@
 <template>
-  <v-flex xs12 sm8 offset-sm2>
+  <div>
     <h1>About Jimmy</h1>
     <p>
       Jimmy is an open-source web application.
@@ -18,10 +18,10 @@
     <p>
       None of the data we have about you will ever be shared to a third party.
       Even for a lot of money.
-      Pictures will stay yours, you can delete them any time, there is no backup on our side, 
+      Pictures will stay yours, you can delete them any time, there is no backup on our side,
       so any deletion is permanent.
     </p>
-  </v-flex>
+  </div>
 </template>
 
 <script>

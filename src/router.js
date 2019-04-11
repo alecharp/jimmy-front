@@ -5,7 +5,7 @@ import {
   auth,
 } from './firebase';
 
-import Login from './components/Login';
+import Login from './views/Login';
 
 Vue.use(Router);
 
@@ -25,12 +25,12 @@ const router = new Router({
       children: [
         {
           path: '',
-          redirect: '/user',
+          redirect: '/me',
         },
         {
-          path: 'user',
+          path: 'me',
           name: 'user',
-          component: () => import(/* webpackChunkName: 'user' */ './components/User'),
+          component: () => import(/* webpackChunkName: 'user' */ './views/User'),
           meta: { secured: true },
         },
         {

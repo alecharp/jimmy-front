@@ -1,6 +1,6 @@
 <template>
   <v-layout row wrap align-center>
-    <v-flex x12 sm6 offset-sm3 md4 offset-md4>
+    <v-flex x12 sm10 offset-sm1 md6 offset-md3>
       <v-card>
         <v-img>
           <v-img :aspect-ratio="16/10" :src="user.picture"></v-img>
@@ -11,9 +11,12 @@
             <p>Welcome to Jimmy.</p>
             <p>You logged in using the email <span class="font-italic">{{ user.email }}</span></p>
             <p>
-              For the moment, this is all we are offering in the application.
-              Come back later for more.
-            </p>
+              This is not you?
+              <v-btn small flat @click="logout">
+                <v-icon small left>fas fa-sign-out-alt</v-icon>
+                Log out
+                </v-btn>
+              </p>
           </div>
         </v-card-title>
       </v-card>
@@ -29,6 +32,12 @@ export default {
     ...mapState([
       'user',
     ]),
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch('logout')
+        .then(() => this.$router.push('login'));
+    },
   },
 };
 </script>
