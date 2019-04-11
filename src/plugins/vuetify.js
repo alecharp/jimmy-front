@@ -15,6 +15,8 @@ import Vuetify, {
   VToolbarItems,
   VToolbarSideIcon,
   VToolbar,
+  VFooter,
+  VContent,
 } from 'vuetify/lib';
 import 'vuetify/src/stylus/app.styl';
 import '@fortawesome/fontawesome-free/css/all.css';
@@ -40,6 +42,8 @@ Vue.use(Vuetify, {
     VToolbarItems,
     VToolbarSideIcon,
     VToolbar,
+    VFooter,
+    VContent,
   },
   lang: {
     locales: { en, es, fr },

@@ -1,5 +1,5 @@
 <template>
-  <v-layout row wrap align-center>
+  <v-layout row wrap align-center fill-height>
     <v-flex x12 sm6 offset-sm3 md4 offset-md4>
       <v-card>
         <v-img>

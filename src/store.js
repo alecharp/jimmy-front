@@ -6,11 +6,14 @@ import 'firebase/auth';
 
 Vue.use(Vuex);
 
+const { version: appVersion } = require('../package.json');
+
 export const USER_MUTATION = 'USER_MUTATION';
 
 export default new Vuex.Store({
   state: {
     user: { isAnonymous: true },
+    appVersion,
   },
   mutations: {
     [USER_MUTATION](state, user) {
