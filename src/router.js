@@ -1,8 +1,9 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import firebase from 'firebase/app';
-import 'firebase/auth';
+import {
+  auth,
+} from './firebase';
 
 import Login from './components/Login';
 
@@ -48,7 +49,7 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-  const { currentUser } = firebase.auth();
+  const { currentUser } = auth;
   const isSecured = to.matched.some(route => route.meta.secured);
 
   if (isSecured && !currentUser) {

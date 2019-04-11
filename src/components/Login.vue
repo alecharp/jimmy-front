@@ -35,7 +35,9 @@
 
 <script>
 import firebase from 'firebase/app';
-import 'firebase/auth';
+import {
+  auth,
+} from '../firebase';
 
 export default {
   data: () => ({
@@ -47,8 +49,8 @@ export default {
       this.login(provider);
     },
     login: (provider) => {
-      firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
-        .then(() => firebase.auth().signInWithRedirect(provider));
+      auth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
+        .then(() => auth.signInWithRedirect(provider));
     },
   },
 };

@@ -1,8 +1,9 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-import firebase from 'firebase/app';
-import 'firebase/auth';
+import {
+  auth,
+} from './firebase';
 
 Vue.use(Vuex);
 
@@ -22,7 +23,7 @@ export default new Vuex.Store({
   },
   actions: {
     logout(context) {
-      return firebase.auth().signOut()
+      return auth.signOut()
         .then(() => {
           context.commit(USER_MUTATION, { isAnonymous: true });
         });

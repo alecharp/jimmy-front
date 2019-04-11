@@ -1,7 +1,9 @@
 import Vue from 'vue';
 import './plugins/vuetify';
-import firebase from 'firebase/app';
-import 'firebase/auth';
+
+import {
+  auth,
+} from './firebase';
 
 import App from './App';
 import router from './router';
@@ -9,8 +11,7 @@ import store, {
   USER_MUTATION,
 } from './store';
 
-firebase.initializeApp();
-firebase.auth().onAuthStateChanged(
+auth.onAuthStateChanged(
   (user) => {
     new Vue({
       router,
@@ -20,10 +21,10 @@ firebase.auth().onAuthStateChanged(
 
     if (user !== null) {
       const {
-        displayName, email, photoURL: picture, isAnonymous,
+        displayName, email, photoURL: picture, isAnonymous, uid,
       } = user;
       store.commit(USER_MUTATION, {
-        displayName, email, picture, isAnonymous,
+        displayName, email, picture, isAnonymous, uid,
       });
       if (router.currentRoute.name === 'login') {
         router.push({ path: '/' });
