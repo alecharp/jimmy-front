@@ -5,8 +5,8 @@
     </v-content>
     <v-footer app class="pa-3">
       <v-flex text-xs-center xs12>
-        <span class="grey--text">
-          &copy;2019 -- v{{ appVersion }}
+        <span class="grey--text caption">
+          &copy;2019 &mdash; v{{ appVersion }}
         </span>
       </v-flex>
     </v-footer>
