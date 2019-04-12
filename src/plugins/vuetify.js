@@ -4,6 +4,7 @@ import Vuetify, {
   VLayout,
   VFlex,
   VCard,
+  VCardText,
   VImg,
   VCardActions,
   VBtn,
@@ -13,10 +14,11 @@ import Vuetify, {
   VToolbarTitle,
   VContainer,
   VToolbarItems,
-  VToolbarSideIcon,
   VToolbar,
   VFooter,
   VContent,
+  VDialog,
+  VProgressLinear,
 } from 'vuetify/lib';
 import 'vuetify/src/stylus/app.styl';
 import '@fortawesome/fontawesome-free/css/all.css';
@@ -31,6 +33,7 @@ Vue.use(Vuetify, {
     VLayout,
     VFlex,
     VCard,
+    VCardText,
     VImg,
     VCardActions,
     VBtn,
@@ -40,10 +43,11 @@ Vue.use(Vuetify, {
     VToolbarTitle,
     VContainer,
     VToolbarItems,
-    VToolbarSideIcon,
     VToolbar,
     VFooter,
     VContent,
+    VDialog,
+    VProgressLinear,
   },
   lang: {
     locales: { en, es, fr },

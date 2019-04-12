@@ -25,7 +25,7 @@ const router = new Router({
       children: [
         {
           path: '',
-          redirect: '/me',
+          redirect: '/events',
         },
         {
           path: 'me',
@@ -38,6 +38,12 @@ const router = new Router({
           name: 'about',
           component: () => import(/* webpackChunkName: 'about' */ './views/About'),
           meta: { secured: false },
+        },
+        {
+          path: 'events',
+          name: 'events',
+          component: () => import(/* webpackChunkName: 'events' */ './views/EventsListing'),
+          meta: { secured: true },
         },
       ],
     },
