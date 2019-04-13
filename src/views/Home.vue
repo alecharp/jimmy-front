@@ -15,7 +15,7 @@
           <v-icon small>fas fa-sign-out-alt</v-icon>
         </v-btn>
         <v-btn icon :to="{ name: 'user' }" depressed>
-          <v-avatar size="36px">
+          <v-avatar size="32px">
             <v-img v-if="user && user.picture" :src="user.picture"></v-img>
             <v-icon v-else>fas fa-user</v-icon>
           </v-avatar>

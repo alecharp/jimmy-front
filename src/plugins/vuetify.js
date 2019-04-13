@@ -19,6 +19,8 @@ import Vuetify, {
   VContent,
   VDialog,
   VProgressLinear,
+  VDataTable,
+  VAlert,
 } from 'vuetify/lib';
 import 'vuetify/src/stylus/app.styl';
 import '@fortawesome/fontawesome-free/css/all.css';
@@ -48,6 +50,8 @@ Vue.use(Vuetify, {
     VContent,
     VDialog,
     VProgressLinear,
+    VDataTable,
+    VAlert,
   },
   lang: {
     locales: { en, es, fr },

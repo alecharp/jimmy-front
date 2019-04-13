@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import './plugins/vuetify';
+import * as moment from 'moment';
 
 import {
   auth,
@@ -10,6 +11,8 @@ import router from './router';
 import store, {
   USER_MUTATION,
 } from './store';
+
+moment.locale(window.navigator.userLanguage || window.navigator.language);
 
 auth.onAuthStateChanged(
   (user) => {

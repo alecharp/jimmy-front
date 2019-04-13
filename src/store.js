@@ -32,7 +32,8 @@ export default new Vuex.Store({
       context.commit(USER_MUTATION, { isAnonymous: true });
     }),
     fetchEventsList: context => firestore.collection('events').get()
-      .then(querySnapshot => querySnapshot.docs.map(doc => doc.data()))
+      .then(querySnapshot => querySnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })))
+      .then(events => events.map(event => ({ ...event, date: event.date.toDate() })))
       .then((events) => {
         context.commit(EVENTS_LIST_MUTATION, events);
       })
