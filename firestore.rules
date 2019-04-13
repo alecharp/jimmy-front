@@ -1,8 +1,21 @@
 service cloud.firestore {
   match /databases/{database}/documents {
+  	function isSignedIn() {
+    	return request.auth.uid != null;
+    }
+
+    function isOrganizerOf(rsc) {
+    	return isSignedIn() && 
+      	(request.auth.uid in rsc.data.organizers);
+    }
+
+    function isAttending(rsc) {
+    	return isSignedIn() && 
+      	(request.auth.uid in rsc.data.attendees);
+    }
+
     match /events/{event} {
-      allow read: if request.auth != null && request.auth.uid != null &&
-        ((request.auth.uid in resource.data.organizers) || (request.auth.uid in resource.data.attendees));
+      allow read: if isOrganizerOf(resource) || isAttending(resource);
       allow write: if false;
     }
   }

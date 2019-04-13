@@ -13,6 +13,22 @@ const { version: appVersion } = require('../package.json');
 export const USER_MUTATION = 'USER_MUTATION';
 export const EVENTS_LIST_MUTATION = 'EVENTS_LIST_MUTATION';
 
+const parseEventsQuery = querySnapshot => querySnapshot.docs
+  .map((doc) => {
+    const data = doc.data();
+    return { ...data, id: doc.id, date: data.date.toDate() };
+  });
+
+const fetchEventsAttending = userId => firestore.collection('events')
+  .where('attendees', 'array-contains', userId)
+  .get()
+  .then(parseEventsQuery);
+
+const fetchEventsOrganizing = userId => firestore.collection('events')
+  .where('organizers', 'array-contains', userId)
+  .get()
+  .then(parseEventsQuery);
+
 export default new Vuex.Store({
   state: {
     user: { isAnonymous: true },
@@ -28,16 +44,16 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    logout: context => auth.signOut().then(() => {
-      context.commit(USER_MUTATION, { isAnonymous: true });
+    logout: ({ commit }) => auth.signOut().then(() => {
+      commit(USER_MUTATION, { isAnonymous: true });
     }),
-    fetchEventsList: context => firestore.collection('events').get()
-      .then(querySnapshot => querySnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })))
-      .then(events => events.map(event => ({ ...event, date: event.date.toDate() })))
-      .then((events) => {
-        context.commit(EVENTS_LIST_MUTATION, events);
-      })
-    ,
+    fetchEventsList: async ({ commit, state }) => commit(
+      EVENTS_LIST_MUTATION,
+      [
+        ...await fetchEventsOrganizing(state.user.uid),
+        ...await fetchEventsAttending(state.user.uid),
+      ],
+    ),
   },
   getters: {
     isAuthenticated: state => () => state.user && !state.user.isAnonymous,
