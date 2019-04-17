@@ -5,6 +5,8 @@ import {
   auth,
 } from './firebase';
 
+import Empty from './views/Empty';
+import Home from './views/Home';
 import Login from './views/Login';
 
 Vue.use(Router);
@@ -21,7 +23,7 @@ const router = new Router({
     },
     {
       path: '/',
-      component: () => import(/* webpackChunkName: 'home' */'./views/Home'),
+      component: Home,
       children: [
         {
           path: '',
@@ -41,9 +43,15 @@ const router = new Router({
         },
         {
           path: 'events',
-          name: 'events',
-          component: () => import(/* webpackChunkName: 'events' */ './views/EventsListing'),
+          component: Empty,
           meta: { secured: true },
+          children: [
+            {
+              path: '',
+              name: 'events',
+              component: () => import(/* webpackChunkName: 'events' */ './views/EventsListing'),
+            },
+          ],
         },
       ],
     },
@@ -54,7 +62,7 @@ const router = new Router({
   ],
 });
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, _, next) => {
   const { currentUser } = auth;
   const isSecured = to.matched.some(route => route.meta.secured);
 
