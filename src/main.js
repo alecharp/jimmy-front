@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import './plugins/vuetify';
-import * as moment from 'moment';
+import moment from 'moment';
 
 import {
   auth,
@@ -13,6 +13,8 @@ import store, {
 } from './store';
 
 moment.locale(window.navigator.userLanguage || window.navigator.language);
+
+Vue.filter('asDate', date => moment(date).format('LL'));
 
 auth.onAuthStateChanged(
   (user) => {

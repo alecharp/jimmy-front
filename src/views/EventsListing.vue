@@ -31,7 +31,7 @@
             {{ props.item.title }}
           </td>
           <td class="text-xs-right">
-            {{ formatDate(props.item.date) }}
+            {{ props.item.date | asDate }}
           </td>
         </template>
       </v-data-table>
@@ -41,7 +41,6 @@
 
 <script>
 import { mapState } from 'vuex';
-import * as moment from 'moment';
 
 export default {
   data: () => ({
@@ -82,7 +81,6 @@ export default {
     hasError() {
       return this.error !== null && this.error !== {};
     },
-    formatDate: date => moment(date).format('LL'),
   },
 };
 </script>
