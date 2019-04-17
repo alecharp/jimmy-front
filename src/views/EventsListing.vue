@@ -66,7 +66,7 @@ export default {
   methods: {
     fetchData() {
       this.loading = true;
-      this.$store.dispatch('fetchEventsList')
+      this.$store.dispatch('fetchEvents')
         .catch((error) => {
           this.loading = false;
           this.error = error;

@@ -47,7 +47,7 @@ export default new Vuex.Store({
     logout: ({ commit }) => auth.signOut().then(() => {
       commit(USER_MUTATION, { isAnonymous: true });
     }),
-    fetchEventsList: async ({ commit, state }) => commit(
+    fetchEvents: async ({ commit, state }) => commit(
       EVENTS_LIST_MUTATION,
       [
         ...await fetchEventsOrganizing(state.user.uid),
