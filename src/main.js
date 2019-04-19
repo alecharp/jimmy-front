@@ -1,7 +1,7 @@
 import Vue from 'vue';
-import './plugins/vuetify';
 import moment from 'moment';
 
+import './plugins/vuetify';
 import {
   auth,
 } from './firebase';

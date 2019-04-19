@@ -1,6 +1,6 @@
 <template>
-  <v-layout row wrap align-center>
-    <v-flex x12 sm10 offset-sm1 md6 offset-md3>
+  <v-layout align-center justify-center column fill-height>
+    <v-flex xs12 sm8 offset-sm-2>
       <v-card>
         <v-img>
           <v-img :aspect-ratio="16/10" :src="user.picture"></v-img>

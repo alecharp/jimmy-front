@@ -1,7 +1,9 @@
 <template>
   <v-app>
     <v-content>
-      <router-view />
+      <v-layout fluid fill-height>
+        <router-view />
+      </v-layout>
     </v-content>
     <v-footer app class="pa-3">
       <v-flex text-xs-center xs12>
